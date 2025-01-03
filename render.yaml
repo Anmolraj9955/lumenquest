@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: lumenquest
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn taskmanager.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: 'False'
+      - key: ALLOWED_HOSTS
+        value: 'your-app-name.onrender.com'
+      - key: DATABASE_URL
+        value: 'your-database-connection-string'
+      - key: SECRET_KEY
+        value: 'your-very-secure-secret-key'
+      - key: DJANGO_SETTINGS_MODULE
+        value: 'your_project_name.settings'
